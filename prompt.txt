@@ -14,3 +14,19 @@ NAZWA NARZĘDZIA — to nazwa narzędzia, które zdefiniowałeś. Może być to 
 PARAMETRY — to opcjonalne parametry, które mogą być używane przez narzędzie. W zadaniu nie są one wymagane, ale możesz je użyć, jeśli narzędzie ich wymaga.
 
 Nie chce żadnych dodatkowych komentarzy ani formatowania testu. 
+
+Masz do dyspozycji dwa narzędzia
+
+tool1 - zwraca informacje na temat osób wraz z informacjami na temat uczelni
+Odbiera POST w formacie 
+{
+  "input": "<szukaj>"
+}
+gdzie <szukaj> to " in pełne imie osoby"
+
+tool2 - zwraca informacje na temat badań wraz z informacjami na temat uczelni
+Odbiera POST w formacie 
+{
+  "input": "<szukaj>"
+}
+gdzie <szukaj> to " in  nazwa_badania"

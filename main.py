@@ -30,13 +30,15 @@ async def tool_1(request: Request):
             # Łączenie danych
             result = []
             for osoba in osoby:
-                uczelnia_info = uczelnie_dict.get(osoba["uczelnia"], {})
-                full_data = {**osoba, **{
-                    "nazwa_uczelni": uczelnia_info.get("nazwa"),
-                    "miasto_uczelni": uczelnia_info.get("miasto"),
-                    "uczelnia_id": uczelnia_info.get("id")
-                }}
-                result.append(full_data)
+                full_name = osoba["imie"] + " " + osoba["nazwisko"]
+                if request.input.lower() in full_name.lower():
+                    uczelnia_info = uczelnie_dict.get(osoba["uczelnia"], {})
+                    full_data = {**osoba, **{
+                        "nazwa_uczelni": uczelnia_info.get("nazwa"),
+                        "miasto_uczelni": uczelnia_info.get("miasto"),
+                        "uczelnia_id": uczelnia_info.get("id")
+                    }}
+                    result.append(full_data)
 
     return result
 
@@ -56,12 +58,13 @@ async def tool_2(request: Request):
             # Łączenie danych
             result = []
             for badanie in badania:
-                uczelnia_info = uczelnie_dict.get(badanie["uczelnia"], {})
-                full_data = {**badanie, **{
-                    "nazwa_uczelni": uczelnia_info.get("nazwa"),
-                    "miasto_uczelni": uczelnia_info.get("miasto"),
-                    "uczelnia_id": uczelnia_info.get("id")
-                }}
-                result.append(full_data)
+                if request.input.lower() in badanie.get("nazwa", "").lower():
+                    uczelnia_info = uczelnie_dict.get(badanie["uczelnia"], {})
+                    full_data = {**badanie, **{
+                        "nazwa_uczelni": uczelnia_info.get("nazwa"),
+                        "miasto_uczelni": uczelnia_info.get("miasto"),
+                        "uczelnia_id": uczelnia_info.get("id")
+                    }}
+                    result.append(full_data)
 
     return result
