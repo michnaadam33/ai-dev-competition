@@ -1,0 +1,16 @@
+Odpowiedz na pytanie:
+"Wymień członków zespołu prowadzącego badania nad podróżami w czasie na jednej z polskich uczelni. Podaj nazwę tej uczelni oraz sponsora tych badań"
+
+Musisz zwracać poprawną odpowiedź w formacie JSON.
+  {
+    "action":"akcja",
+    "value":"nazwa narzędzia",
+    "params":"parametry"
+  }
+AKCJA — tutaj masz do wyboru opcję usetool lub answer. Pierwszej używasz, gdy agent ma wykorzystać narzędzie (tool1 lub tool2), drugiej, gdy masz już odpowiedź na pytanie. Udzielenie odpowiedzi kończy cały algorytm, więc możesz tej opcji użyć tylko jeden raz.
+
+NAZWA NARZĘDZIA — to nazwa narzędzia, które zdefiniowałeś. Może być to tool1 lub tool2.
+
+PARAMETRY — to opcjonalne parametry, które mogą być używane przez narzędzie. W zadaniu nie są one wymagane, ale możesz je użyć, jeśli narzędzie ich wymaga.
+
+Nie chce żadnych dodatkowych komentarzy ani formatowania testu. 

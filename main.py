@@ -33,7 +33,8 @@ async def tool_1(request: Request):
                 uczelnia_info = uczelnie_dict.get(osoba["uczelnia"], {})
                 full_data = {**osoba, **{
                     "nazwa_uczelni": uczelnia_info.get("nazwa"),
-                    "miasto_uczelni": uczelnia_info.get("miasto")
+                    "miasto_uczelni": uczelnia_info.get("miasto"),
+                    "uczelnia_id": uczelnia_info.get("id")
                 }}
                 result.append(full_data)
 
@@ -46,8 +47,21 @@ async def tool_2(request: Request):
         result = {
             "output": request.input,
         }
-    elif request.input == "badania":
+    else:
+        with open("files/uczelnie.json", "r", encoding="utf-8") as f:
+            uczelnie = json.load(f)
+            uczelnie_dict = {u["id"]: u for u in uczelnie}
         with open("files/badania.json", "r") as f:
-            result = json.load(f)
+            badania = json.load(f)
+            # Łączenie danych
+            result = []
+            for badanie in badania:
+                uczelnia_info = uczelnie_dict.get(badanie["uczelnia"], {})
+                full_data = {**badanie, **{
+                    "nazwa_uczelni": uczelnia_info.get("nazwa"),
+                    "miasto_uczelni": uczelnia_info.get("miasto"),
+                    "uczelnia_id": uczelnia_info.get("id")
+                }}
+                result.append(full_data)
 
     return result
