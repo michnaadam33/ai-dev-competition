@@ -28,6 +28,7 @@ async def tool_1(request: Request):
         result = {
             "output": request.input,
         }
+        return result
     else:
         with open("files/uczelnie.json", "r", encoding="utf-8") as f:
             uczelnie = json.load(f)
@@ -49,7 +50,7 @@ async def tool_1(request: Request):
                     }}
                     result.append(full_data)
 
-    return result
+    return result[:10]
 
 
 @app.post("/tool2")
@@ -58,6 +59,7 @@ async def tool_2(request: Request):
         result = {
             "output": request.input,
         }
+        return result
     else:
         with open("files/uczelnie.json", "r", encoding="utf-8") as f:
             uczelnie = json.load(f)
@@ -76,4 +78,4 @@ async def tool_2(request: Request):
                     }}
                     result.append(full_data)
 
-    return result
+    return result[:10]
