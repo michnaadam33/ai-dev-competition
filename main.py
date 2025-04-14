@@ -1,6 +1,8 @@
 from typing import Annotated
 
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import PlainTextResponse
 
 from pydantic import BaseModel
 import json
@@ -11,6 +13,13 @@ class Request(BaseModel):
 
 
 app = FastAPI()
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    print(f"Validation error for request: {request.url}\n{exc.errors()}")
+
+    return PlainTextResponse(str(exc), status_code=400)
 
 
 @app.post("/tool1")
