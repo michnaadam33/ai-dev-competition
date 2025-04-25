@@ -50,7 +50,7 @@ async def tool_1(request: Request):
                     }}
                     result.append(full_data)
 
-    return result[:10]
+    return result[:5]
 
 
 @app.post("/tool2")
@@ -80,4 +80,4 @@ async def tool_2(request: Request):
                     }}
                     result.append(full_data)
 
-    return result[:10]
+    return result[:3]
