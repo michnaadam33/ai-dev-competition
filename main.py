@@ -69,7 +69,9 @@ async def tool_2(request: Request):
             # Łączenie danych
             result = []
             for badanie in badania:
-                if request.input.lower() in badanie.get("nazwa", "").lower():
+                input_words = request.input.lower().split()
+                # Sprawdź, czy jakiekolwiek słowo pasuje
+                if any(word in badanie.get("nazwa", "").lower() for word in input_words):
                     uczelnia_info = uczelnie_dict.get(badanie["uczelnia"], {})
                     full_data = {**badanie, **{
                         "nazwa_uczelni": uczelnia_info.get("nazwa"),

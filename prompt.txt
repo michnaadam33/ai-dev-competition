@@ -1,32 +1,37 @@
 Odpowiedz na pytanie:
 "Wymień członków zespołu prowadzącego badania nad podróżami w czasie na jednej z polskich uczelni. Podaj nazwę tej uczelni oraz sponsora tych badań"
 
-Musisz zwracać poprawną odpowiedź w formacie JSON.
-  {
-    "action":"akcja",
-    "value":"nazwa narzędzia",
-    "params":"parametry"
-  }
-AKCJA — tutaj masz do wyboru opcję usetool lub answer. Pierwszej używasz, gdy agent ma wykorzystać narzędzie (tool1 lub tool2), drugiej, gdy masz już odpowiedź na pytanie. Udzielenie odpowiedzi kończy cały algorytm, więc możesz tej opcji użyć tylko jeden raz.
+Odpowiedz TYLKO na podstawie danych z narzędzi.
+Wywołuj narzędzia, aż zdobędziesz potrzebną wiedzę.
 
-NAZWA NARZĘDZIA — to nazwa narzędzia, które zdefiniowałeś. Może być to tool1 lub tool2.
+Możesz skorzystać z narzędzi:
+- tool1 - użyj go gdy chcesz dostać informacje o osobach oraz ich uczelniach
+- tool2 - użyj gdy chcesz dostać informacje o badaniach i uczelniach na których są wykonywane
 
-PARAMETRY — to opcjonalne parametry, które mogą być używane przez narzędzie. W zadaniu nie są one wymagane, ale możesz je użyć, jeśli narzędzie ich wymaga.
+Jeśli znasz odpowiedź, to ją podaj.
+Jeśli chcesz skorzystać z narzędzia, to podaj jego nazwę
 
-Nie chce żadnych dodatkowych komentarzy ani formatowania testu. 
+Twoja odpowiedź MUSI być w formacie JSON.
 
-Masz do dyspozycji dwa narzędzia
-
-tool1 - zwraca informacje na temat osób wraz z informacjami na temat uczelni
-Odbiera POST w formacie 
+<przykład-użycia-narzędzia>
 {
-  "input": "<szukaj>"
+"action":"usetool",
+"value":"tool1",
+"params":"jakieś parametry"
 }
-gdzie <szukaj> to " in pełne imie osoby"
+</przykład-użycia-narzędzia>
 
-tool2 - zwraca informacje na temat badań wraz z informacjami na temat uczelni
-Odbiera POST w formacie 
+
+<przykład-odpowiedzi>
 {
-  "input": "<szukaj>"
+"action":"answer",
+"value":"oto odpowiedź na Twoje pytanie",
+"params":"puste"
 }
-gdzie <szukaj> to " in  nazwa_badania"
+</przykład-odpowiedzi>
+
+Action może mieć jedną z dwóch wartości:
+- usetool - gdy chcesz użyć narzędzia (jego nazwę podaj w value, a parametry w params)
+- answer - gdy znasz odpowiedź (params pozostaw puste, a value ma zawierać odpowiedź).
+
+Uwaga! JSON musi zawierać wszystkie podane w przykładzie pola. Nie dodawaj własnych komentarzy ani formatowania Markdown (``` itp.)
