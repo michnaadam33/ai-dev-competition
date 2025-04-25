@@ -50,7 +50,7 @@ async def tool_1(request: Request):
                             }}
                             result.append(full_data)
 
-    return result[:5]
+    return result
 
 
 @app.post("/tool2")
