@@ -45,12 +45,10 @@ async def tool_1(request: Request):
                         if osoba["uczelnia"] == request.input:
                             full_data = {**osoba, **{
                                 "nazwa_uczelni": uczelnia_info.get("nazwa"),
-                                "miasto_uczelni": uczelnia_info.get("miasto"),
-                                "uczelnia_id": uczelnia_info.get("id")
                             }}
                             result.append(full_data)
 
-    return result[:7]
+    return result
 
 
 @app.post("/tool2")
