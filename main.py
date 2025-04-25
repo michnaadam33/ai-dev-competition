@@ -30,25 +30,25 @@ async def tool_1(request: Request):
         }
         return result
     else:
-        print(f"Request: {request.input}")
         with open("files/uczelnie.json", "r", encoding="utf-8") as f:
+            result = []
             uczelnie = json.load(f)
             uczelnie_dict = {u["id"]: u for u in uczelnie}
             uczelnia_info = uczelnie_dict.get(request.input, False)
             if uczelnia_info:
                 # Jeśli uczelnia istnieje, zwróć jej dane
-                return uczelnia_info
-
-        with open("files/osoby.json", "r", encoding="utf-8") as f:
-            osoby = json.load(f)
-
-            # Łączenie danych
-            result = []
-            for osoba in osoby:
-                full_name = osoba["imie"] + " " + osoba["nazwisko"]
-                if request.input.lower() in full_name.lower():
-                    uczelnia_info = uczelnie_dict.get(osoba["uczelnia"], {})
-                    result.append(osoba)
+                osoby = []
+                with open("files/osoby.json", "r", encoding="utf-8") as f:
+                    osoby = json.load(f)
+                    # Łączenie danych
+                    for osoba in osoby:
+                        if osoba["uczelnia"] == request.input:
+                            full_data = {**osoba, **{
+                                "nazwa_uczelni": uczelnia_info.get("nazwa"),
+                                "miasto_uczelni": uczelnia_info.get("miasto"),
+                                "uczelnia_id": uczelnia_info.get("id")
+                            }}
+                            result.append(full_data)
 
     return result[:5]
 
@@ -61,7 +61,7 @@ async def tool_2(request: Request):
         }
         return result
     else:
-        print(f"Request: {request.input}")
+        print
         with open("files/badania.json", "r") as f:
             badania = json.load(f)
             # Łączenie danych
